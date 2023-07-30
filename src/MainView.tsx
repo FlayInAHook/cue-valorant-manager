@@ -141,19 +141,19 @@ const MainView: React.FC = () => {
         return <></>
        }
        return (<>
-            <Button onClick={() => switchViewableScene(4)}>
+            <Button mr={2} onClick={() => switchViewableScene(4)}>
                 Flex
             </Button>
-            <Button onClick={() => switchViewableScene(3)}>
+            <Button mr={2} onClick={() => switchViewableScene(3)}>
                 Kurai
             </Button>
-            <Button onClick={() => switchViewableScene(2)}>
+            <Button mr={2} onClick={() => switchViewableScene(2)}>
                 Lecadi
             </Button>
-            <Button onClick={() => switchViewableScene(1)}>
+            <Button mr={2} onClick={() => switchViewableScene(1)}>
                 Mufn
             </Button>
-            <Button onClick={() => switchViewableScene(0)}>
+            <Button mr={2} onClick={() => switchViewableScene(0)}>
                 ResQ
             </Button>
         </>)
