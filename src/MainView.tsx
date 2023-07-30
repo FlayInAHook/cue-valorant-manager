@@ -52,6 +52,7 @@ const MainView: React.FC = () => {
     }
     function afterConnectRequests(){
         onGetScenes();
+        obs.call("SetStudioModeEnabled", {studioModeEnabled: true})
         setConnectedToOBS(true);
     }
 
@@ -91,13 +92,15 @@ const MainView: React.FC = () => {
         const callArray: RequestBatchRequest[] = [];
         setSwapDisabled(true);
 
+       
         await obs.call("SetCurrentPreviewScene", {sceneName: obsIngameScene});
-        callArray.push({requestType: "SetCurrentSceneTransition", requestData: {transitionName: "CUE Übergang"}})
+        //callArray.push({requestType: "SetCurrentSceneTransition", requestData: {transitionName: "CUE Übergang"}})
         callArray.push({requestType: "TriggerStudioModeTransition"})
         obs.callBatch(callArray).then((value) => {
             setTimeout(() => {
-                obs.call("SetCurrentSceneTransition", {transitionName: "Schnitt"});
-                obs.call("SetCurrentPreviewScene", {sceneName: obsIngameScene});
+                //obs.call("SetCurrentSceneTransition", {transitionName: "Schnitt"});
+                //obs.call("SetCurrentPreviewScene", {sceneName: obsIngameScene});
+                obs.call("SetStudioModeEnabled", {studioModeEnabled: false})
                 setIsIngameScene(true);
                 setSwapDisabled(false);
             }, 4000)
@@ -108,15 +111,21 @@ const MainView: React.FC = () => {
     async function onSwapCams(){
         const callArray: RequestBatchRequest[] = [];
         setSwapDisabled(true);
-        await obs.call("SetCurrentPreviewScene", {sceneName: obsCamScene});
-        callArray.push({requestType: "SetCurrentSceneTransition", requestData: {transitionName: "CUE Übergang"}})
-        callArray.push({requestType: "TriggerStudioModeTransition"})
-        obs.callBatch(callArray).then((value) => {
+    
+        await obs.call("SetStudioModeEnabled", {studioModeEnabled: true});
+        
+        setTimeout(async ()=> {
+            await obs.call("SetCurrentPreviewScene", {sceneName: obsCamScene});
+            callArray.push({requestType: "SetCurrentSceneTransition", requestData: {transitionName: "CUE Übergang"}})
+            callArray.push({requestType: "TriggerStudioModeTransition"})
+            obs.callBatch(callArray).then((value) => {
             setIsIngameScene(false)
             setTimeout(() => {
                 setSwapDisabled(false);
             }, 4000)
         });
+        }, 500)
+        
     }
     
 
