@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai'
 import { obsCamSceneAtom, obsIPAtom, obsIngameSceneAtom, obsPasswordAtom, obsPortAtom } from './Store'
 import { useState } from 'react';
-import { Box, Button, HStack, Input, InputGroup, InputLeftAddon, Select, Switch, useToast } from '@chakra-ui/react';
+import { Box, Button, HStack, Input, InputGroup, InputLeftAddon, Select, Stack, Switch, useToast } from '@chakra-ui/react';
 import OBSWebSocket, {EventSubscription, RequestBatchRequest} from 'obs-websocket-js';
 
 
@@ -160,8 +160,8 @@ const MainView: React.FC = () => {
        
     }
 
-    return (<>
-        <HStack>
+    function getOptionElements(): React.ReactNode{
+        return (<>
             <InputGroup size={"lg"}>
                 <InputLeftAddon  pointerEvents='none'>
                     IP:
@@ -200,10 +200,13 @@ const MainView: React.FC = () => {
                     })}
                 </Select>
             </InputGroup>
-            
-            
-            
-        </HStack>
+        </>)
+    }
+
+    return (<>
+        <Stack direction={['column', 'row']}>
+            {getOptionElements()}
+        </Stack>
         <Box mt="2">
             <Button mr="2" onClick={onConnect}>Connect</Button>
             <Button isDisabled={swapDisabled} display={connectedToOBS ? "" : 'none'} mr="2" onClick={onSwapIngame}>Swap to Ingame</Button>
