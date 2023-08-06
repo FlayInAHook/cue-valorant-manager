@@ -59,7 +59,7 @@ const MainView: React.FC = () => {
     function onGetSceneItems(){
         obs.call("GetSceneItemList", {sceneName: obsIngameScene}).then((response) => {
             console.log("preprep", response.sceneItems)
-            const playerSceneIDs: number[] = response.sceneItems.map((scene: any) => scene.sceneItemId);
+            const playerSceneIDs: number[] = response.sceneItems.filter((scene: any) => scene.sourceName.includes("Valorant Spieler ")).map((scene: any) => scene.sceneItemId);
             setPlayerSourceIDs(playerSceneIDs);
             console.log("playerSceneIDs", playerSceneIDs)
         })
