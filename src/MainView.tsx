@@ -145,16 +145,16 @@ const MainView: React.FC = () => {
                 Flex
             </Button>
             <Button mr={2} onClick={() => switchViewableScene(3)}>
-                Kurai
+                Specter
             </Button>
             <Button mr={2} onClick={() => switchViewableScene(2)}>
-                Lecadi
+                SkirtZ
             </Button>
             <Button mr={2} onClick={() => switchViewableScene(1)}>
                 Mufn
             </Button>
             <Button mr={2} onClick={() => switchViewableScene(0)}>
-                ResQ
+                Marian
             </Button>
         </>)
        
