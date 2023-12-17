@@ -148,7 +148,7 @@ const MainView: React.FC = () => {
                 Specter
             </Button>
             <Button mr={2} onClick={() => switchViewableScene(2)}>
-                SkirtZ
+                Jules
             </Button>
             <Button mr={2} onClick={() => switchViewableScene(1)}>
                 Mufn
